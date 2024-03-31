@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // debounce and throttling
+        let timeout;
+        function debouncePopulateDiv(){
+            // delay call to populateDiv until it has not been called for 100 ms
+            clearTimeout(timeout); // if current fun being called with in 100 ms, then current timeout will 
+            // be erased and new timeout start, and thus we avoided sending request
+            timeout = setTimeout(function(){
+                populateDiv()
+            }, 100);
+        }
+
+        function populateDiv() {
+            // alert("hi")
+            // document - global var provided by browser
+            const a = document.getElementById("firstNumber").value;
+            const b = document.getElementById("secondNumber").value;
+            // let sum = parseInt(a) + parseInt(b);
+            // const element = document.getElementById("finalSum");
+            // element.innerHTML = "total sum = " + sum;
+            fetch("https://sum-server.100xdevs.com/sum?a=" + a + "&b=" + b)
+            .then(function(response){
+                console.log(response);
+
+                response.text()
+                .then(function(ans){
+                    console.log(ans);
+                    document.getElementById("finalSum").innerHTML = "sum is " + ans;
+                })
+            })
+        }
+
+            // same 
+            async function populateDiv2() {
+            // alert("hi")
+            // document - global var provided by browser
+            const a = document.getElementById("firstNumber").value;
+            const b = document.getElementById("secondNumber").value;
+            // let sum = parseInt(a) + parseInt(b);
+            // const element = document.getElementById("finalSum");
+            // element.innerHTML = "total sum = " + sum;
+            const reponse = await fetch("https://sum-server.100xdevs.com/sum?a=" + a + "&b=" + b)
+            const ans = await response.text();
+            document.getElementById("finalSum").innerHTML = ans; 
+        }
+    </script>
+    <input oninput="debouncePopulateDiv()" type="text" name="" id="firstNumber" placeholder="first number"><br>
+    <input oninput="debouncePopulateDiv()" type="text" name="" id="secondNumber" placeholder="second number"><br>
+    <button onclick="populateDiv()">calculate sum</button> <br>
+    <div id="finalSum"></div>
+</body>
+</html>
