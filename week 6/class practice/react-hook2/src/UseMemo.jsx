@@ -19,6 +19,7 @@ function UseMemo(){
     //     }
     // }
 
+    // we can return value from inner function
     useMemo(()=>{
         for(let i=1;i<=inputvalue;i++){
             sum += i;

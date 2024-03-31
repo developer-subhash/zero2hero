@@ -3,6 +3,9 @@ import React from "react"
 import './App.css'
 import axios from 'axios'
 import UseMemo from './UseMemo';
+import MultipleHook from './MultipleHook';
+import UseCallback from './UseCallback';
+import UseRef from './UseRef';
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -43,6 +46,10 @@ function App() {
       {currentTask >= 0 ? 
         <Todo title={todos[currentTask].title} description={todos[currentTask].description} /> : <Dummy />
          }
+
+      <MultipleHook />
+      <UseCallback />
+      <UseRef />
     </div>
   )
 }
