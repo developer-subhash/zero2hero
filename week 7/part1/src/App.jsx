@@ -2,6 +2,7 @@ import { Suspense, lazy, useState } from 'react'
 import './App.css'
 import { BrowserRouter, Route, Routes, useNavigate} from 'react-router-dom'
 import Header from './component/Header'
+import PropDrilling from './component/PropDrilling';
 
 // component lazy loading for optimization
 const Landing = lazy(() => import('./component/Landing'));
@@ -21,6 +22,8 @@ function App() {
         <Route path="/dashboard" element={<Suspense fallback={"loading...."}><Dashboard /></Suspense>}></Route>
         <Route path="/" element={<Suspense fallback={"loading ...."}><Landing /></Suspense>}></Route>
       </Routes>
+      <br />
+      <PropDrilling />
     </BrowserRouter>
     </div>
   )
